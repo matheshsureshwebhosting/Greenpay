@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from kanakku.dreamguystech.com/template-html/data-tables.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 02 Feb 2021 23:22:39 GMT -->
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+	<title>Other Certificate History</title>
+
+	<!-- Favicon -->
+	<link rel="shortcut icon" href="/public/img/favicon.png">
+
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="/public/css/bootstrap.min.css">
+
+	<!-- Fontawesome CSS -->
+	<link rel="stylesheet" href="/public/plugins/fontawesome/css/fontawesome.min.css">
+	<link rel="stylesheet" href="/public/plugins/fontawesome/css/all.min.css">
+
+	<!-- Datatables CSS -->
+	<link rel="stylesheet" href="/public/plugins/datatables/datatables.min.css">
+
+	<!-- Main CSS -->
+	<link rel="stylesheet" href="/public/css/style.css">
+<link rel="stylesheet" href="/public/css/simplePagination.css">
+<link rel="stylesheet" href="/public/css/stylepagination.css">
+	<!--[if lt IE 9]>
+			<script src="/public/js/main/html5shiv.min.js"></script>
+			<script src="/public/js/main/respond.min.js"></script>
+		<![endif]-->
+</head>
+
+<body>
+
+	<!-- Main Wrapper -->
+	<div class="main-wrapper">
+
+		<%- include('partial/header'); %>
+			<!-- Page Wrapper -->
+			<div class="page-wrapper">
+				<div class="content container-fluid">
+
+					<!-- Page Header -->
+					
+					<!-- /Page Header -->
+
+					<div class="row">
+						<div class="col-sm-12">
+							<div class="card">
+								<div class="card-header">
+									<h4 class="card-title">Applied Certificate</h4>
+								</div>
+								<div class="card-body">
+
+									<div class="table-responsive">
+										<table class="datatable table">
+											<thead>
+												<tr>
+													<th>Date</th>
+													<th>Name</th>
+													<th>Email</th>
+													<th>Phone Number</th>
+													<th>Certificate</th>
+												</tr>
+											</thead>
+											<tbody id="history">
+
+											</tbody>
+										</table>
+										<div class="text-center" id="nodata">No data</div>
+									</div>
+								</div>
+							</div>
+							<div id="pagination-container" style="float: right;"></div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+			<!-- /Page Wrapper -->
+
+	</div>
+	<!-- /Main Wrapper -->
+
+	<!-- jQuery -->
+	<script src="/public/js/main/jquery-3.5.1.min.js"></script>
+
+	<!-- Bootstrap Core JS -->
+	<script src="/public/js/main/popper.min.js"></script>
+	<script src="/public/js/main/bootstrap.min.js"></script>
+
+	<!-- Feather Icon JS -->
+	<script src="/public/js/main/feather.min.js"></script>
+
+	<!-- Slimscroll JS -->
+	<script src="/public/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+	<!-- Select2 JS -->
+	<script src="/public/plugins/select2/js/select2.min.js"></script>
+
+	<!-- Datepicker Core JS -->
+	<script src="/public/plugins/moment/moment.min.js"></script>
+	<script src="/public/js/main/bootstrap-datetimepicker.min.js"></script>
+
+	<!-- Datatables JS -->
+	<script src="/public/plugins/datatables/jquery.dataTables.min.js"></script>
+	<script src="/public/plugins/datatables/datatables.min.js"></script>
+
+	<!-- Custom JS -->
+	<script src="/public/js/main/script.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/8.2.3/firebase.js"></script>
+
+	<!-- TODO: Add SDKs for Firebase products that you want to use
+			 https://firebase.google.com/docs/web/setup#available-libraries -->
+	<script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-analytics.js"></script>
+	<script src="/public/js/jquery.simplePagination.js"></script>
+</body>
+<script src="/public/js/custom/firebase.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+<script>
+	
+	var db = firebase.firestore();
+  var uemail=localStorage.getItem("uemail")
+		db.collection("Documents").orderBy("date", "desc").get()  //
+        .then(function (querySnapshot) {
+            var dataid = [], certificates = [], certificatesid = []
+            querySnapshot.forEach(function (doc) {
+                var data = [], slips = []
+                if (doc.data().appliedemail==uemail && doc.data().isOther == true && doc.data().othercertificates!=undefined) {                               
+					if (doc.data().otherslips != undefined) {
+						slips.push(doc.data().otherslips)
+					}
+                    	data.push(doc.data().othercertificates)
+                    	dataid.push(doc.data())														
+                    			document.getElementById("history").innerHTML += `
+                        <tr class='history'>
+							<td>
+            <div class="userDatatable-content">
+                ${moment(doc.data().date).format('MMMM Do YYYY')}
+            </div>
+		</td>
+            <td>
+            <div class="userDatatable-content">
+                ${doc.data().name}
+            </div>
+		</td>
+		<td>
+            <div class="userDatatable-content">
+                ${doc.data().email}
+            </div>
+		</td>
+		<td>
+            <div class="userDatatable-content">
+                ${doc.data().number}
+            </div>
+        </td>
+        <td>
+            <div class="userDatatable-content" id="certificate${doc.id}">
+            </div>
+        </td>
+                    </tr>`
+
+                    			for (var i = 0; i < data.length; i++) {
+                    				for (var j = 0; j < data[i].length; j++) {
+                    					document.getElementById(`certificate${doc.id}`).innerHTML += `
+                    		          <a href="javascript:void(0)" onclick="opencertificate(this)" id='${data[i][j]}' class="${doc.id} ${data[i][j]}">${data[i][j]}<br>`
+                    					slips.filter(d => {
+                    						for (var k = 0; k < d.length; k++) {
+                    							if (d[k].certificate == data[i][j]) {
+                    								document.getElementsByClassName(`${doc.id} ${data[i][j]}`)[0].style.color = "green"
+                    							}
+
+                    						}
+                    					})
+                    				}
+                    			}                    
+                }
+            })
+            pagination(dataid.length)
+            if (dataid.length == 0) {
+                document.getElementById("nodata").style.display = "block"
+            } else {
+                document.getElementById("nodata").style.display = "none"
+            }
+        })
+		function opencertificate(e) {		
+		var fullcertificate = e.className.split(" ")	
+		var certificatename=e.id.split(" ").join("")
+		var email=fullcertificate[0]		
+		localStorage.setItem("certificatename",e.id)
+		window.location.replace("/download/" + email + "_" + certificatename)
+
+	}
+	
+	function pagination(length) {
+		if(length>15){
+		var items = $("#history .history");
+		var numItems = length;	
+		console.log(numItems);	
+		var perPage = 15;
+
+		items.slice(perPage).hide();
+
+		$('#pagination-container').pagination({
+			items: numItems,
+			itemsOnPage: perPage,
+			prevText: "&laquo;",
+			nextText: "&raquo;",
+			onPageClick: function (pageNumber) {
+				var showFrom = perPage * (pageNumber - 1);
+				var showTo = showFrom + perPage;
+				items.hide().slice(showFrom, showTo).show();
+			}
+		});
+	}
+	}
+</script>
+
+<!-- Mirrored from kanakku.dreamguystech.com/template-html/data-tables.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 02 Feb 2021 23:22:39 GMT -->
+
+</html>

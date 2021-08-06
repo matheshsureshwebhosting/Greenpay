@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    var datas = [
+        {
+            "id": 6,
+            "name": "Kalidas",
+            "email": "s.kalidas120799@gmail.com",
+            "number": "+919080711080",
+            "appliedname": "test",
+            "appliedemail": "test@gmail.com",
+            "appliedeno": "123456",
+            "certificatename": "Flight Ticket",
+            "certificates": "'[{\"passport\":\"1111\"},{\"trip\":\"1111\"},{\"aadhar\":\"https://firebasestorage.googleapis.com/v0/b/test-35516.appspot.com/o/userid%2FKalidas%2FFlightticket%2Fauther%2F'%20%2B%20happy.gif?alt=media&token=831ff808-a24b-46c3-aaa4-1dc770f9f06e\"},{\"others\":\"none\"}]'",
+            "slip": "null",
+            "iscomplete": "false",
+            "userid": "77818rgy",
+            "date": "2021-07-28T08:15:53.000Z"
+        },
+        {
+            "id": 7,
+            "name": "Kalidas1",
+            "email": "s.kalidas120799@gmail.com",
+            "number": "+919080711080",
+            "appliedname": "test",
+            "appliedemail": "test@gmail.com",
+            "appliedeno": "123456",
+            "certificatename": "Flight Ticket",
+            "certificates": "'[{\"passport\":\"1111\"},{\"trip\":\"1111\"},{\"aadhar\":\"https://firebasestorage.googleapis.com/v0/b/test-35516.appspot.com/o/userid%2FKalidas1%2FFlightticket%2Fauther%2F'%20%2B%20happy.gif?alt=media&token=40fbcb79-dc45-49e5-864b-8ae74d4b8893\"},{\"others\":\"none\"}]'",
+            "slip": "null",
+            "iscomplete": "false",
+            "userid": "77818rgy",
+            "date": "2021-07-28T08:16:38.000Z"
+        }
+    ]
+    // getalldata()
+    async function getalldata() {
+        var mydata = []
+        var alldata = datas.forEach((data) => {
+            data["certificates"] = JSON.parse(data.certificates)
+            mydata.push(data)
+        })
+        console.log(mydata)
+
+    }
+
+    var check = "'[{\"passport\":\"1111\"},{\"trip\":\"1111\"},{\"aadhar\":\"https://firebasestorage.googleapis.com/v0/b/test-35516.appspot.com/o/userid%2FKalidas%2FFlightticket%2Fauther%2F'%20%2B%20happy.gif?alt=media&token=831ff808-a24b-46c3-aaa4-1dc770f9f06e\"},{\"others\":\"none\"}]'"
+    var check1 = [{"passport":"1111"},{"trip":"1111"},{"aadhar":"https://firebasestorage.googleapis.com/v0/b/test-35516.appspot.com/o/userid%2FKalidas%2FFlightticket%2Fauther%2F'%20%2B%20happy.gif?alt=media&token=831ff808-a24b-46c3-aaa4-1dc770f9f06e"},{"others":"none"}]
+    // console.log(check.substring(1))
+    console.log(check,check1)
+
+</script>
+
+</html>

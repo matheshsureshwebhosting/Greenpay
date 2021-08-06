@@ -1,0 +1,233 @@
+<link rel="stylesheet" href="/public/log/vendor/toaster/toaster/build/toastr.css">
+<script src="/public/log/vendor/jquery/jquery-3.2.1.min.js"></script>
+<script src="/public/log/vendor/toaster/toaster/build/toastr.min.js"></script>
+<script src="/public/js/toaster.js"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+<div class="header">
+
+    <!-- Logo -->
+    <div class="header-left">
+        <a href="/" class="logo">
+            <img src="/public/img/logo.png" alt="Logo">
+        </a>
+        <a href="/" class="logo logo-small">
+            <img src="/public/img/logo-small.png" alt="Logo" width="30" height="30">
+        </a>
+    </div>
+    <!-- /Logo -->
+
+
+
+
+
+    <!-- Mobile Menu Toggle -->
+    <a class="mobile_btn" id="mobile_btn">
+        <i class="fas fa-bars"></i>
+    </a>
+    <!-- Header Menu -->
+    <ul class="nav user-menu">
+        <li class="nav-item dropdown has-arrow main-drop">
+            <a href="/payment/addpayments" class="mr-1 nav-link">
+                Balance : ₹ <span id="balance1"> 0 </span>
+            </a>
+        </li>
+        <li class="nav-item dropdown has-arrow main-drop">
+            <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                <span class="user-img">
+                    <img src="/public/img/dummyimg.png" alt="">
+                    <span class="status online"></span>
+                </span>
+                <span id="username">Client</span>
+            </a>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" href="/dashboard"><i data-feather="home" class="mr-1"></i>
+                    Dashboard</a>
+                <a class="dropdown-item" href="javascript:void(0)" onclick="checkout()"><i data-feather="log-out"
+                        class="mr-1"></i>
+                    Logout</a>
+            </div>
+        </li>
+        <!-- /User Menu -->
+
+    </ul>
+    <!-- /Header Menu -->
+    <div>
+        <marquee style="font-size: 25px;background-color: #dee2e6;height: 30px;color: red;" id="marqueedata">Welcome To
+            Greenpay</marquee>
+    </div>
+
+</div>
+<!-- /Header -->
+
+<!-- Sidebar -->
+<div class="sidebar" id="sidebar">
+    <div class="sidebar-inner slimscroll">
+        <div id="sidebar-menu" class="sidebar-menu">
+            <ul>
+                <li class="submenu">
+                    <a href="/dashboard"><i data-feather="home"></i> <span>Dashboard</span>
+                        <span class="menu-arrow"></span></a>
+                    <ul>
+                        <li class="submenu"><a href="javascript:void(0)">Certificates <span
+                                    class="menu-arrow"></span></a>
+                            <ul>
+                                <li><a href="/certificate/Incomecertificate"> Income Certificate </a></li>
+                                <li><a href="/certificate/Firstgraduatecertificate"> First Graduate Certificate </a>
+                                </li>
+                                <li><a href="/certificate/Communitycertificate"> Community Certificte </a></li>
+                                <li><a href="/certificate/Widowcertificate"> Widow Certificate </a></li>
+                                <li><a href="/certificate/Intercastecertificate"> Inter Caste Marriage Certificate </a>
+                                </li>
+                                <li><a href="/certificate/Unmarriedcertificate"> Unmarried Certificate </a></li>
+                                <li><a href="/certificate/Unemploymentcerificate"> UnEmployeMent Certificte </a></li>
+                                <li><a href="/certificate/Nativecertificate"> Native Certificate </a></li>
+                                <li><a href="/certificate/Legalheircertificate"> LegelHeir Certificate </a></li>
+                                <li><a href="/certificate/Obccertificate"> OBC Certificate </a></li>
+                                <li><a href="/certificate/Nomalecertificate"> No Male Child Certificte </a></li>
+                                <li><a href="/certificate/OAB"> OAB </a></li>
+                                <li><a href="/certificate/migration-certificate"> Migration Certificate </a></li>
+                                <li><a href="/certificate/farmer-certificate"> Farmer Certificate </a></li>
+                                <li><a href="/certificate/widow-pension"> Widow Pension </a></li>
+                                <li><a href="/certificate/Residential"> Residential Certificate </a></li>
+                            </ul>
+                        </li>
+                        <li class="submenu"><a href="javascript:void(0)">Insurance<span class="menu-arrow"></span></a>
+                            <ul>
+                                <li><a href="/insurance/two"> Two Wheeler Insurance </a></li>
+                                <li><a href="/insurance/four"> Four Wheeler Insurance </a></li>
+                                <li><a href="/insurance/bus"> Bus / Lorry Insurance </a></li>
+                                <li><a href="/insurance/auto"> Auto Insurance </a></li>
+                                <li><a href="/insurance/foodlicence"> Food Licence Insurance </a></li>
+
+                            </ul>
+                        </li>
+                        <li class="submenu"><a href="javascript:void(0)">Aadhar<span class="menu-arrow"></span></a>
+                            <ul>
+                                <li><a href="/aadhar/name"> Aadhar Name Update</a></li>
+                                <li><a href="/aadhar/address"> Aadhar Address Update </a></li>
+                                <li><a href="/aadhar/dob">Aadhar DOB Update </a></li>
+                                <li><a href="/aadhar/phone"> Aadhar Phone Number Update </a></li>
+                            </ul>
+                        </li>
+                        <li class="submenu"><a href="javascript:void(0)">Ticket Booking<span
+                                    class="menu-arrow"></span></a>
+                            <ul>
+                                <li><a href="/tickets/Flightticket"> Flight Ticket Booking </a></li>
+                                <li><a href="/tickets/Traintickets"> Train Ticket Booking </a></li>
+                                <li><a href="/tickets/Thirupathiticket"> Thirupathi Dharisanam Ticket Booking</a></li>
+
+                            </ul>
+                        </li>
+                        <li class="submenu"><a href="javascript:void(0)">ID Proof<span class="menu-arrow"></span></a>
+                            <ul>
+                                <li><a href="/certificate/Pancertificate"> Pan Card </a></li>
+                                <li><a href="/certificate/Voteridcertificate"> Voter Id </a></li>
+                                <li><a href="/certificate/Smartcard"> SmartCard </a></li>
+                                <li><a href="https://www.myutiitsl.com/PAN_ONLINE/ePANCard"> E-Pan Registation </a></li>
+                            </ul>
+                        </li>
+                        <li class="submenu"><a href="/passport">Passport<span class="menu-arrow"></span></a>
+                            <ul>
+                                <li><a href="/passport/passportnew"> New Passport </a></li>
+                                <li><a href="/passport/passportrenewal"> Renewal Passport </a></li>
+                                <li><a href="/passport/policeclearance"> Police Clearance Certificate </a></li>
+                                <li><a href="/passport/tatkal"> Tatkaal Scheme </a></li>
+                                <li><a href="/passport/childrenewal"> Child Renewal Passport </a></li>
+                                <li><a href="/passport/childadult"> Child Adult Passport </a></li>
+                            </ul>
+                        </li>
+
+
+                        <li><a href="/certificate/MSMEcertificate"> MSME </a></li>
+                        <li><a href="/certificate/Gstcertificate"> Gst </a></li>
+
+                        <li><a href="/certificate/itfiling"> It Filing </a></li>
+                        <li><a href="/certificate/pattatransfer"> Patta Transfer </a></li>
+                        <li><a href="/certificate/IRCTC"> IRCTC </a></li>
+
+                        <li><a href="/certificate/gstmonthly"> Gst Monthly Filing </a></li>
+                        <li><a href="/certificate/incometax"> Income Tax Return </a></li>
+                        <li><a href="/certificate/FSSAI"> Fssai Licence </a></li>
+                        <li><a href="/certificate/Fire"> Fire Licence </a></li>
+                        <li><a href="/certificate/Pvt"> Pvt Limited Registation </a></li>
+                        <li><a href="/certificate/drug"> Drug Licence (Medical Shop) </a></li>
+
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="/history"><i data-feather="layers"></i> <span>Applied Certificate</span></a>
+                </li>
+                <li>
+                    <a href="/payment"><i data-feather="credit-card"></i> <span>Payments</span></a>
+                </li>
+                <li>
+                    <a href="/support"><i data-feather="headphones"></i> <span>Support</span></a>
+                </li>
+                <li>
+                    <a href="/wallecthistory"><i data-feather="credit-card"></i> <span>Wallet  History</span></a>
+                </li>
+
+                <li>
+                    <a href="/tickets"><i class="fa fa-ticket" aria-hidden="true"></i><span>Tickets Request</span></a>
+                </li>
+                <li>
+                    <a href="/changepassword"><i data-feather="key"></i> <span>Change Password</span></a>
+                </li>
+            </ul>
+
+
+        </div>
+    </div>
+</div>
+<script src="https://www.gstatic.com/firebasejs/8.2.3/firebase.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+			 https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-analytics.js"></script>
+<script src="/public/js/custom/firebase.js"></script>
+<script>
+
+    var db = firebase.firestore();
+
+    db.collection("marquee").doc("live")
+        .get().then(function (doc) {
+            console.log(doc.data().marquee)
+            document.getElementById("marqueedata").innerHTML = doc.data().marquee
+
+
+        })
+
+    var uemail = localStorage.getItem("uemail");
+    function checkout() {
+        localStorage.removeItem("userid")
+        localStorage.removeItem("uemail")
+        window.location.replace("/")
+    }
+
+    db.collection("users").doc(uemail).get().then((doc) => {
+        document.getElementById("username").innerHTML = doc.data().uname
+    })
+
+
+    window.onload = () => {
+        var uemail = localStorage.getItem("uemail")
+        if (uemail == null) {
+            toastr["error"]("Please Login");
+            setTimeout(() => { window.location.replace("/login") }, 1000)
+
+        }
+    }
+
+    db.collection("users").doc(uemail).collection("wallet").doc(uemail).get()
+        .then(function (doc) {
+            if (doc.data() != undefined) {
+                console.log(doc.data().amount)
+                document.getElementById("balance1").innerHTML = doc.data().amount
+            }
+            else {
+                document.getElementById("balance1").innerHTML = 0
+            }
+        })
+</script>

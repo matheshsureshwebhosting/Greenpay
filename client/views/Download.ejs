@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from kanakku.dreamguystech.com/template-html/blank-page.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 02 Feb 2021 23:22:29 GMT -->
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+	<title>Download Page</title>
+
+	<!-- Favicon -->
+	<link rel="shortcut icon" href="/public/img/favicon.png">
+
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="/public/css/bootstrap.min.css">
+
+	<!-- Fontawesome CSS -->
+	<link rel="stylesheet" href="/public/plugins/fontawesome/css/fontawesome.min.css">
+	<link rel="stylesheet" href="/public/plugins/fontawesome/css/all.min.css">
+
+	<!-- Main CSS -->
+	<link rel="stylesheet" href="/public/css/style.css">
+
+	<!--[if lt IE 9]>
+			<script src="/public/js/main/html5shiv.min.js"></script>
+			<script src="/public/js/main/respond.min.js"></script>
+		<![endif]-->
+</head>
+<style>
+	#nodata {
+		display: none;
+	}
+</style>
+
+<body>
+
+	<!-- Main Wrapper -->
+	<div class="main-wrapper">
+		<%- include('partial/header'); %>
+
+			<!-- Page Wrapper -->
+			<div class="page-wrapper">
+				<div class="content container-fluid">
+
+					<!-- Page Header -->
+					<div class="page-header">
+						<div class="row">
+							<div class="col-sm-12">
+								<h3 class="page-title">Download Page</h3>
+								<ul class="breadcrumb">
+									<li class="breadcrumb-item"><a href="index.html">Customer History</a></li>
+									<li class="breadcrumb-item active">Download Page</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<!-- /Page Header -->
+
+					<div class="row">
+
+						<table class="datatable table">
+							<thead>
+								<tr>
+									<th>Slip</th>
+									<th>Download</th>
+								</tr>
+							</thead>
+							<tbody id="downloaddata">
+
+							</tbody>
+						</table>
+
+					</div>
+					<div id="nodata" style="text-align: center;
+					margin-top: 18px;">No Slips</div>
+				</div>
+			</div>
+			<!-- /Page Wrapper -->
+			<% url=url %>
+	</div>
+	<!-- /Main Wrapper -->
+
+	<!-- jQuery -->
+	<script src="/public/js/main/jquery-3.5.1.min.js"></script>
+
+	<!-- Bootstrap Core JS -->
+	<script src="/public/js/main/popper.min.js"></script>
+	<script src="/public/js/main/bootstrap.min.js"></script>
+
+	<!-- Feather Icon JS -->
+	<script src="/public/js/main/feather.min.js"></script>
+
+	<!-- Slimscroll JS -->
+	<script src="/public/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+	<!-- Select2 JS -->
+	<script src="/public/plugins/select2/js/select2.min.js"></script>
+
+	<!-- Datepicker Core JS -->
+	<script src="/public/plugins/moment/moment.min.js"></script>
+	<script src="/public/js/main/bootstrap-datetimepicker.min.js"></script>
+
+	<!-- Datatables JS -->
+	<script src="/public/plugins/datatables/jquery.dataTables.min.js"></script>
+	<script src="/public/plugins/datatables/datatables.min.js"></script>
+
+	<!-- Custom JS -->
+	<!-- <script src="/public/js/main/script.js"></script> -->
+	<script src="https://www.gstatic.com/firebasejs/8.2.3/firebase.js"></script>
+
+	<!-- TODO: Add SDKs for Firebase products that you want to use
+			 https://firebase.google.com/docs/web/setup#available-libraries -->
+	<script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-analytics.js"></script>
+
+</body>
+<script>
+	var url = "<%= url %>"
+</script>
+<script src="/public/js/custom/firebase.js"></script>
+<script>
+
+	var db = firebase.firestore();
+	var urls = url.split("_")
+	var cemail = urls[0], certificate = urls[1]
+	console.log(cemail, certificate)
+	db.collection("Documents").doc(cemail).get().then(function (doc) {
+		if (certificate == "CommunityCertificate") {
+			for (const [key, value] of Object.entries(doc.data().CommunityCertificate)) {
+				document.getElementById("downloaddata").innerHTML += `<tr><td>${key}</td>
+					<td><a href="${value}" class="btn" target=__blank>Download</a></td></tr>
+					`
+			}
+		} else if (certificate == "FirstGraduateCertificate") {
+			for (const [key, value] of Object.entries(doc.data().FirstGraduateCertificate)) {
+				document.getElementById("downloaddata").innerHTML += `<tr><td>${key}</td>
+					<td><a href="${value}" class="btn" target=__blank>Download</a></td></tr>
+					`
+			}
+		}
+		else if (certificate == "FlightTicket") {
+			for (const [key, value] of Object.entries(doc.data().FlightTicket)) {
+				document.getElementById("downloaddata").innerHTML += `<tr><td>${key}</td>
+					<td><a href="${value}" class="btn" target=__blank>Download</a></td></tr>
+					`
+			}
+		}else if (certificate == "IncomeCertificate") {
+			for (const [key, value] of Object.entries(doc.data().IncomeCertificate)) {
+				document.getElementById("downloaddata").innerHTML += `<tr><td>${key}</td>
+					<td><a href="${value}" class="btn" target=__blank>Download</a></td></tr>
+					`
+			}
+		}else if (certificate == "WidowCertificate") {
+			for (const [key, value] of Object.entries(doc.data().WidowCertificate)) {
+				document.getElementById("downloaddata").innerHTML += `<tr><td>${key}</td>
+					<td><a href="${value}" class="btn" target=__blank>Download</a></td></tr>
+					`
+			}
+		}
+		else if (certificate == "InterCasteCertificate") {
+			for (const [key, value] of Object.entries(doc.data().InterCasteCertificate)) {
+				document.getElementById("downloaddata").innerHTML += `<tr><td>${key}</td>
+					<td><a href="${value}" class="btn" target=__blank>Download</a></td></tr>
+					`
+			}
+		}else if (certificate == "UnmarriedCertificate") {
+			for (const [key, value] of Object.entries(doc.data().UnmarriedCertificate)) {
+				document.getElementById("downloaddata").innerHTML += `<tr><td>${key}</td>
+					<td><a href="${value}" class="btn" target=__blank>Download</a></td></tr>
+					`
+			}
+		}else if (certificate == "UnemploymentCertificate") {
+			for (const [key, value] of Object.entries(doc.data().UnemploymentCertificate)) {
+				document.getElementById("downloaddata").innerHTML += `<tr><td>${key}</td>
+					<td><a href="${value}" class="btn" target=__blank>Download</a></td></tr>
+					`
+			}
+		}
+		else if (certificate == "VoteridCertificate") {
+			for (const [key, value] of Object.entries(doc.data().VoteridCertificate)) {
+				document.getElementById("downloaddata").innerHTML += `<tr><td>${key}</td>
+					<td><a href="${value}" class="btn" target=__blank>Download</a></td></tr>
+					`
+			}
+		}else if (certificate == "GstCertificate") {
+			for (const [key, value] of Object.entries(doc.data().GstCertificate)) {
+				document.getElementById("downloaddata").innerHTML += `<tr><td>${key}</td>
+					<td><a href="${value}" class="btn" target=__blank>Download</a></td></tr>
+					`
+			}
+		}else if (certificate == "PanCertificate") {
+			for (const [key, value] of Object.entries(doc.data().PanCertificate)) {
+				document.getElementById("downloaddata").innerHTML += `<tr><td>${key}</td>
+					<td><a href="${value}" class="btn" target=__blank>Download</a></td></tr>
+					`
+			}
+		}else if (certificate == "ObcCertificate") {
+			for (const [key, value] of Object.entries(doc.data().ObcCertificate)) {
+				document.getElementById("downloaddata").innerHTML += `<tr><td>${key}</td>
+					<td><a href="${value}" class="btn" target=__blank>Download</a></td></tr>
+					`
+			}
+		}else if (certificate == "LegalheirCertificate") {
+			for (const [key, value] of Object.entries(doc.data().LegalheirCertificate)) {
+				document.getElementById("downloaddata").innerHTML += `<tr><td>${key}</td>
+					<td><a href="${value}" class="btn" target=__blank>Download</a></td></tr>
+					`
+			}
+		}else if (certificate == "NativeCertificate") {
+			for (const [key, value] of Object.entries(doc.data().NativeCertificate)) {
+				document.getElementById("downloaddata").innerHTML += `<tr><td>${key}</td>
+					<td><a href="${value}" class="btn" target=__blank>Download</a></td></tr>
+					`
+			}
+		}else if (certificate == "twoWheelerCertificate") {
+			for (const [key, value] of Object.entries(doc.data().InsurenceCertificateTwo)) {
+				document.getElementById("downloaddata").innerHTML += `<tr><td>${key}</td>
+					<td><a href="${value}" class="btn" target=__blank>Download</a></td></tr>
+					`
+			}
+		}else if (certificate == "foodlicence") {
+			for (const [key, value] of Object.entries(doc.data().foodlicence)) {
+				document.getElementById("downloaddata").innerHTML += `<tr><td>${key}</td>
+					<td><a href="${value}" class="btn" target=__blank>Download</a></td></tr>
+					`
+			}
+		}else if (certificate == "FourWheelerCertificate") {
+			for (const [key, value] of Object.entries(doc.data().InsurencecertificateFour)) {
+				document.getElementById("downloaddata").innerHTML += `<tr><td>${key}</td>
+					<td><a href="${value}" class="btn" target=__blank>Download</a></td></tr>
+					`
+			}
+		}else if (certificate == "ThirupathiTicket") {
+			for (const [key, value] of Object.entries(doc.data().ThirupathiTicket)) {
+				document.getElementById("downloaddata").innerHTML += `<tr><td>${key}</td>
+					<td><a href="${value}" class="btn" target=__blank>Download</a></td></tr>
+					`
+			}
+		}else if (certificate == "TrainTicket") {
+			for (const [key, value] of Object.entries(doc.data().TrainTicket)) {
+				document.getElementById("downloaddata").innerHTML += `<tr><td>${key}</td>
+					<td><a href="${value}" class="btn" target=__blank>Download</a></td></tr>
+					`
+			}
+		}else if (certificate == "IRCTC") {
+			for (const [key, value] of Object.entries(doc.data().IRCTC)) {
+				document.getElementById("downloaddata").innerHTML += `<tr><td>${key}</td>
+					<td><a href="${value}" class="btn" target=__blank>Download</a></td></tr>
+					`
+			}
+		}else if (certificate == "Pattatransfer") {
+			for (const [key, value] of Object.entries(doc.data().Pattatransfer)) {
+				document.getElementById("downloaddata").innerHTML += `<tr><td>${key}</td>
+					<td><a href="${value}" class="btn" target=__blank>Download</a></td></tr>
+					`
+			}
+		}else if (certificate == "Itfiling") {
+			for (const [key, value] of Object.entries(doc.data().Itfiling)) {
+				document.getElementById("downloaddata").innerHTML += `<tr><td>${key}</td>
+					<td><a href="${value}" class="btn" target=__blank>Download</a></td></tr>
+					`
+			}
+		}else if (certificate == "MSMECertificate") {
+			for (const [key, value] of Object.entries(doc.data().MSMECertificate)) {
+				document.getElementById("downloaddata").innerHTML += `<tr><td>${key}</td>
+					<td><a href="${value}" class="btn" target=__blank>Download</a></td></tr>
+					`
+			}
+		}else if (certificate == "ChildAdult") {
+			for (const [key, value] of Object.entries(doc.data().ChildAdult)) {
+				document.getElementById("downloaddata").innerHTML += `<tr><td>${key}</td>
+					<td><a href="${value}" class="btn" target=__blank>Download</a></td></tr>
+					`
+			}
+		}else if (certificate == "ChildRenewal") {
+			for (const [key, value] of Object.entries(doc.data().ChildRenewal)) {
+				document.getElementById("downloaddata").innerHTML += `<tr><td>${key}</td>
+					<td><a href="${value}" class="btn" target=__blank>Download</a></td></tr>
+					`
+			}
+		}else if (certificate == "Tatkal") {
+			for (const [key, value] of Object.entries(doc.data().Tatkal)) {
+				document.getElementById("downloaddata").innerHTML += `<tr><td>${key}</td>
+					<td><a href="${value}" class="btn" target=__blank>Download</a></td></tr>
+					`
+			}
+		}else if (certificate == "PoliceClearance") {
+			for (const [key, value] of Object.entries(doc.data().PoliceClearance)) {
+				document.getElementById("downloaddata").innerHTML += `<tr><td>${key}</td>
+					<td><a href="${value}" class="btn" target=__blank>Download</a></td></tr>
+					`
+			}
+		}else if (certificate == "RenewalPassport") {
+			for (const [key, value] of Object.entries(doc.data().RenewalPassport)) {
+				document.getElementById("downloaddata").innerHTML += `<tr><td>${key}</td>
+					<td><a href="${value}" class="btn" target=__blank>Download</a></td></tr>
+					`
+			}
+		}else if (certificate == "FreshPassport") {
+			for (const [key, value] of Object.entries(doc.data().FreshPassport)) {
+				document.getElementById("downloaddata").innerHTML += `<tr><td>${key}</td>
+					<td><a href="${value}" class="btn" target=__blank>Download</a></td></tr>
+					`
+			}
+		}else if (certificate == "Smartcard") {
+			for (const [key, value] of Object.entries(doc.data().Smartcard)) {
+				document.getElementById("downloaddata").innerHTML += `<tr><td>${key}</td>
+					<td><a href="${value}" class="btn" target=__blank>Download</a></td></tr>
+					`
+			}
+		}
+		else if (certificate == "AadharAddressUpdate") {
+			
+			for (const [key, value] of Object.entries(doc.data().AadharAddressUpdate)) {
+				document.getElementById("downloaddata").innerHTML += `<tr><td>${key}</td>
+					<td><a href="${value}" class="btn" target=__blank>Download</a></td></tr>
+					`
+			}
+		}
+		else if (certificate == "AadharNameUpdate") {
+			
+			for (const [key, value] of Object.entries(doc.data().AadharNameUpdate)) {
+				document.getElementById("downloaddata").innerHTML += `<tr><td>${key}</td>
+					<td><a href="${value}" class="btn" target=__blank>Download</a></td></tr>
+					`
+			}
+		}
+		else if (certificate == "AadharDOBUpdate") {
+			
+			for (const [key, value] of Object.entries(doc.data().AadharDOBUpdate)) {
+				document.getElementById("downloaddata").innerHTML += `<tr><td>${key}</td>
+					<td><a href="${value}" class="btn" target=__blank>Download</a></td></tr>
+					`
+			}
+		}
+		else if (certificate == "AadharPhoneUpdate") {
+			
+			for (const [key, value] of Object.entries(doc.data().AadharPhoneUpdate)) {
+				document.getElementById("downloaddata").innerHTML += `<tr><td>${key}</td>
+					<td><a href="${value}" class="btn" target=__blank>Download</a></td></tr>
+					`
+			}
+		}
+
+	})
+	var allslips = []
+	db.collection("Documents").doc(cemail).get().then((doc) => {
+		if (doc.data().allslips != undefined) {
+			allslips.push(doc.data().allslips)						
+			allslips.filter(d => {
+				for (var i = 0; i < d.length; i++) {
+					if (d[i].certificate == localStorage.getItem("certificatename"))
+						document.getElementById("downloaddata").innerHTML =
+							`
+			  <tr><td>${d[i].certificate}</td>
+				<td><a href="${d[i].file}" class="btn" target=__blank>Download</a></td></tr>
+
+			  `
+				}
+
+			})
+		}
+	})
+
+	var otherslips = []
+	db.collection("Documents").doc(cemail).get().then((doc) => {
+		if (doc.data().otherslips != undefined) {
+			otherslips.push(doc.data().otherslips)						
+			otherslips.filter(d => {
+				for (var i = 0; i < d.length; i++) {
+					if (d[i].certificate == localStorage.getItem("certificatename"))
+						document.getElementById("downloaddata").innerHTML =
+							`
+			  <tr><td>${d[i].certificate}</td>
+				<td><a href="${d[i].file}" class="btn" target=__blank>Download</a></td></tr>
+
+			  `
+				}
+
+			})
+		} 
+	})
+
+	var panslips = []
+	db.collection("Documents").doc(cemail).get().then((doc) => {
+		if (doc.data().panslips != undefined) {
+			panslips.push(doc.data().panslips)						
+			panslips.filter(d => {
+				for (var i = 0; i < d.length; i++) {
+					if (d[i].certificate == localStorage.getItem("certificatename"))
+						document.getElementById("downloaddata").innerHTML =
+							`
+			  <tr><td>${d[i].certificate}</td>
+				<td><a href="${d[i].file}" class="btn" target=__blank>Download</a></td></tr>
+
+			  `
+				}
+
+			})
+		} 
+	})
+
+</script>
+
+<!-- Mirrored from kanakku.dreamguystech.com/template-html/blank-page.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 02 Feb 2021 23:22:29 GMT -->
+
+</html>

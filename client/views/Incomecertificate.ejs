@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from kanakku.dreamguystech.com/template-html/form-basic-inputs.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 02 Feb 2021 23:21:22 GMT -->
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+	<title>Income Certificate</title>
+
+	<!-- Favicon -->
+	<link rel="shortcut icon" href="/public/img/favicon.png">
+
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="/public/css/bootstrap.min.css">
+
+	<!-- Fontawesome CSS -->
+	<link rel="stylesheet" href="/public/plugins/fontawesome/css/fontawesome.min.css">
+	<link rel="stylesheet" href="/public/plugins/fontawesome/css/all.min.css">
+
+	<!-- Main CSS -->
+	<link rel="stylesheet" href="/public/css/style.css">
+
+	<link rel="stylesheet" href="/public/log/vendor/toaster/toaster/build/toastr.css">
+	<script src="/public/log/vendor/jquery/jquery-3.2.1.min.js"></script>
+	<script src="/public/log/vendor/toaster/toaster/build/toastr.min.js"></script>
+	<script src="/public/js/toaster.js"></script>
+</head>
+
+<body>
+
+	<!-- Main Wrapper -->
+	<div class="main-wrapper">
+
+		<%- include('partial/header'); %>
+
+			<!-- Page Wrapper -->
+			<div class="page-wrapper">
+				<div class="content container-fluid">
+
+					<!-- Page Header -->
+					<div class="page-header">
+						<div class="row">
+							<div class="col">
+								<h3 class="page-title">Income Certificate</h3>
+							</div>
+						</div>
+					</div>
+					<!-- /Page Header -->
+
+					<div class="row">
+						<div class="col-lg-12">
+							<div class="card">
+								<div class="card-header">
+									<h5 class="card-title">Upload Documents</h5>
+									<div style="float: left;margin-top: 10px;">
+										<a href="/public/INFORMATION FORM.pdf" target="_blank"
+											download="Information Form">Information Form</a>
+									</div>
+									<div style="float: right;">
+										<h5 class="card-title">Contact : 9952773574</h5><br>
+										<h5 class="card-title">Price : Rs 60</h5>
+									</div>
+								</div>
+								<div class="card-body">
+									<div>
+										<div class="form-group row">
+											<label class="col-form-label col-md-2">Name</label>
+											<div class="col-md-10">
+												<input type="text" class="form-control" id="name">
+												<div class="invalid-feedback" id="fbname">
+													Please provide a valid Namr.
+												</div>
+											</div>
+										</div>
+										<div class="form-group row">
+											<label class="col-form-label col-md-2">Mobile Number</label>
+											<div class="col-md-10">
+												<input type="number" class="form-control" id="number">
+												<div class="invalid-feedback" id="fbnumber">
+													Please provide a valid Number.
+												</div>
+											</div>
+										</div>
+										<div class="form-group row">
+											<label class="col-form-label col-md-2">Email Id</label>
+											<div class="col-md-10">
+												<input type="email" class="form-control" id="email">
+												<div class="invalid-feedback" id="fbemail">
+													Please provide a valid Email.
+												</div>
+											</div>
+										</div>
+
+										<div class="form-group row">
+											<label class="col-form-label col-md-2">Photo</label>
+											<div class="col-md-10">
+												<input class="form-control" type="file" id="photo">
+												<div class="invalid-feedback" id="fbphoto">
+													Please provide a valid Photo.
+												</div>
+											</div>
+										</div>
+										<div class="form-group row">
+											<label class="col-form-label col-md-2">Aadhar Proof</label>
+											<div class="col-md-10">
+												<input class="form-control" type="file" id="aadhar">
+												<div class="invalid-feedback" id="fbaadhar">
+													Please provide a valid Aadhar.
+												</div>
+											</div>
+										</div>
+										<div class="form-group row">
+											<label class="col-form-label col-md-2">Smart Card Proof</label>
+											<div class="col-md-10">
+												<input class="form-control" type="file" id="smart">
+												<div class="invalid-feedback" id="fbsmart">
+													Please provide a valid Smart.
+												</div>
+											</div>
+										</div>
+										<div class="form-group row">
+											<label class="col-form-label col-md-2">Customer Details</label>
+											<div class="col-md-10">
+												<input class="form-control" type="file" id="customer">
+												<div class="invalid-feedback" id="fbcustomer">
+													Please provide a valid Customer.
+												</div>
+											</div>
+										</div>
+										<div class="form-group row">
+											<label class="col-form-label col-md-2">Scan copy of signature</label>
+											<div class="col-md-10">
+												<input class="form-control" type="file" id="sign">
+												<div class="invalid-feedback" id="fbsign">
+													Please provide a valid Sign.
+												</div>
+											</div>
+										</div>
+										<div class="form-group row">
+											<label class="col-form-label col-md-2">Others</label>
+											<div class="col-md-10">
+												<input class="form-control" type="file" id="others" multiple>
+											</div>
+										</div>
+										<div class="form-group row justify-content-center">
+											<button type="button" class="btn btn-primary btn-lg"
+												id="submitbtn">Submit</button>
+										</div>
+
+
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+
+				</div>
+			</div>
+			<!-- /Page Wrapper -->
+
+	</div>
+	<!-- /Main Wrapper -->
+
+	<script src="/public/js/main/jquery-3.5.1.min.js"></script>
+
+	<!-- Bootstrap Core JS -->
+	<script src="/public/js/main/popper.min.js"></script>
+	<script src="/public/js/main/bootstrap.min.js"></script>
+
+	<!-- Feather Icon JS -->
+	<script src="/public/js/main/feather.min.js"></script>
+
+	<!-- Slimscroll JS -->
+	<script src="/public/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+	<!-- Select2 JS -->
+	<script src="/public/plugins/select2/js/select2.min.js"></script>
+
+	<!-- Datepicker Core JS -->
+	<script src="/public/plugins/moment/moment.min.js"></script>
+	<script src="/public/js/main/bootstrap-datetimepicker.min.js"></script>
+
+	<!-- Custom JS -->
+	<script src="/public/js/main/script.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/8.2.5/firebase.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	<script src="/public/js/custom/firebase.js"></script>
+	<script>
+		var db = firebase.firestore()
+		var storageRef = firebase.storage().ref();
+		var uemail = localStorage.getItem("uemail")
+		document.getElementById("submitbtn").addEventListener("click", async () => {
+
+			var name = document.getElementById("name").value
+			var number = document.getElementById("number").value
+			var email = document.getElementById("email").value
+			var photo = document.getElementById("photo").files[0]
+			var aadhar = document.getElementById("aadhar").files[0]
+			var sign = document.getElementById("sign").files[0]
+			var smart = document.getElementById("smart").files[0]
+			var customer = document.getElementById("customer").files[0]
+			var others = document.getElementById("others").files[0]
+			var emailreg = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
+
+			if (name == "") {
+				document.getElementById("fbname").style.display = "block"
+				return false
+			} else if (number == "") {
+				document.getElementById("fbnumber").style.display = "block"
+				return false
+			} else if (!emailreg.test(email)) {
+				document.getElementById("fbemail").style.display = "block"
+				return false
+			} else if (photo == undefined) {
+				document.getElementById("fbphoto").style.display = "block"
+				return false
+			} else if (aadhar == undefined) {
+				document.getElementById("fbaadhar").style.display = "block"
+				return false
+			} else if (sign == undefined) {
+				document.getElementById("fbsign").style.display = "block"
+				return false
+			} else if (smart == undefined) {
+				document.getElementById("fbsmart").style.display = "block"
+				return false
+			} else if (customer == undefined) {
+				document.getElementById("fbcustomer").style.display = "block"
+				return false
+			} else {
+				toastr["info"]("Please Wait", "File Uploading..");
+				document.getElementById("submitbtn").innerHTML = " <span class='spinner-border spinner-border-sm mr-2' role='status'style='padding: 7px;' aria-hidden='true'></span>Please Wait..."
+
+				var photourl, aadharurl, signurl,
+					smarturl, customerurl, othersurl
+				var userid = email
+				var walletamount = new Promise((resolve, reject) => {
+					var wallet = db.collection("users").doc(uemail).collection("wallet").doc(
+						uemail)
+					wallet.get().then((
+						doc) => {
+						if (doc.data() != undefined) {
+							var useramount = doc.data().amount
+							if (useramount < 60) {
+								console.log("please add money")
+								setTimeout(() => {
+									resolve(0)
+								})
+							} else {
+								resolve(1)
+
+							}
+						} else {
+							console.log("please add money")
+							setTimeout(() => {
+								resolve(0)
+							})
+						}
+					})
+				})
+				var walletprice = await walletamount
+				if (walletprice == 1) {
+					var photoref = storageRef.child(userid + "/" + name + '/Incomecertificate/photo/' + photo
+						.name);
+					await photoref.put(photo).then(function (snapshot) {
+						//getting url  				
+						photoref.getDownloadURL().then(function (url) {
+							photourl = url;
+							console.log(photourl);
+						})
+							.catch(function (error) {
+								console.log("error encountered");
+							});
+					});
+					var aadharref = storageRef.child(userid + "/" + name + '/Incomecertificate/aadhar/' + aadhar
+						.name);
+					await aadharref.put(aadhar).then(function (snapshot) {
+						//getting url  				
+						aadharref.getDownloadURL().then(function (url) {
+							aadharurl = url;
+							console.log(aadharurl);
+						})
+							.catch(function (error) {
+								console.log("error encountered");
+							});
+					});
+
+					var signref = storageRef.child(userid + "/" + name + '/Incomecertificate/sign/' + sign
+						.name);
+					await signref.put(sign).then(function (snapshot) {
+						//getting url  				
+						signref.getDownloadURL().then(function (url) {
+							signurl = url;
+							console.log(signurl);
+						})
+							.catch(function (error) {
+								console.log("error encountered");
+							});
+					});
+
+
+
+					var smartref = storageRef.child(userid + "/" + name + '/Incomecertificate/smart/' + smart
+						.name);
+					await smartref.put(smart).then(function (snapshot) {
+						//getting url  				
+						smartref.getDownloadURL().then(function (url) {
+							smarturl = url;
+							console.log(smarturl);
+						})
+							.catch(function (error) {
+								console.log("error encountered");
+							});
+					});
+					var customerref = storageRef.child(userid + "/" + name + '/Incomecertificate/customer/' +
+						customer
+							.name);
+					await customerref.put(customer).then(function (snapshot) {
+						//getting url  				
+						customerref.getDownloadURL().then(function (url) {
+							customerurl = url;
+							console.log(customerurl);
+						})
+							.catch(function (error) {
+								console.log("error encountered");
+							});
+					});
+					if (others != undefined) {
+						var otherref = storageRef.child(userid + "/" + name + '/Incomecertificate/other/' + others
+							.name);
+						await otherref.put(others).then(function (snapshot) {
+							//getting url  				
+							otherref.getDownloadURL().then(function (url) {
+								othersurl = url;
+								console.log(othersurl);
+							})
+								.catch(function (error) {
+									console.log("error encountered");
+								});
+						});
+					} else {
+						othersurl = "none"
+					}
+					setTimeout(() => {
+						$.ajax({
+							method: "POST",
+							url: "/certificate/Incomecertificate",
+							data: {
+								name: name,
+								number: number,
+								email: email,
+								Certificate: "Incomecertificate",
+								Certificatename: "Income Certificate",
+								photo: photourl,
+								sign: signurl,
+								aadhar: aadharurl,
+								smart: smarturl,
+								others: othersurl,
+								customer: customerurl,
+								uemail: uemail
+							},
+							success: (res) => {
+								if (res.status != undefined) {                                    
+                                    var wallet = db.collection("users").doc(uemail).collection("wallet").doc(uemail)
+                                    var myamount = wallet.get().then((doc) => {
+                                        var useramount = doc.data().amount
+                                        wallet.update({
+                                            amount: Number(useramount) - Number(60)
+                                        }).then(() => {   
+											const monthNames = ["January", "February", "March", "April", "May", "June",
+                                                "July", "August", "September", "October", "November", "December"
+                                            ];
+                                            var date = new Date()
+                                            var cdate = monthNames[date.getMonth()] + " " + date.getDate() + " " + date.getFullYear() + " " + date.getHours() + ":" + date.getMinutes()                                         
+											db.collection("users").doc(uemail).collection("wallethistory").doc().set({
+                                                amount: 60,
+                                                Certificatename: "Income Certificate",
+												date:cdate
+                                            }).then(() => {
+												db.collection("users").doc(uemail).get().then((docss) => {
+                                                    db.collection("wallethistory").doc().set({
+                                                        amount: 60,
+                                                        Certificatename: "Income Certificate",
+                                                        date: cdate,
+                                                        name: docss.data().uname
+                                                    })
+                                                })
+                                                toastr["success"]("Success", "Certificate Upload Successfully..");//successfully
+                                                setTimeout(() => { window.location.reload() }, 2000)
+                                            })
+                                        })
+                                    })
+                                }
+							}
+						})
+					}, 3000)
+
+
+				} else {
+					toastr["error"]("Low Balance", "Please Add Money..");
+				}
+			}
+		})
+	</script>
+</body>
+
+<!-- Mirrored from kanakku.dreamguystech.com/template-html/form-basic-inputs.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 02 Feb 2021 23:21:44 GMT -->
+
+</html>

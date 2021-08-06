@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from kanakku.dreamguystech.com/template-html/add-expenses.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 02 Feb 2021 23:22:44 GMT -->
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+	<title>Support</title>
+
+	<!-- Favicon -->
+	<link rel="shortcut icon" href="/public/img/favicon.png">
+
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="/public/css/bootstrap.min.css">
+
+	<!-- Fontawesome CSS -->
+	<link rel="stylesheet" href="/public/plugins/fontawesome/css/fontawesome.min.css">
+	<link rel="stylesheet" href="/public/plugins/fontawesome/css/all.min.css">
+
+	<!-- Select2 CSS -->
+	<link rel="stylesheet" href="/public/plugins/select2/css/select2.min.css">
+
+	<!-- Datepicker CSS -->
+	<link rel="stylesheet" href="/public/css/bootstrap-datetimepicker.min.css">
+
+	<!-- Main CSS -->
+	<link rel="stylesheet" href="/public/css/style.css">
+
+	<link rel="stylesheet" href="/public/log/vendor/toaster/toaster/build/toastr.css">
+	<script src="/public/log/vendor/jquery/jquery-3.2.1.min.js"></script>
+	<script src="/public/log/vendor/toaster/toaster/build/toastr.min.js"></script>
+	<script src="/public/js/toaster.js"></script>
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+		integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+	<link rel="stylesheet" href="/public/css/simplePagination.css">
+	<link rel="stylesheet" href="/public/css/stylepagination.css">
+</head>
+<style>
+	.selecttag {
+		width: 25%;
+		margin-bottom: 12px;
+		margin-left: 869px;
+	}
+
+	@media screen and (max-width:600px) {
+		.selecttag {
+			width: auto;
+			margin-bottom: 12px;
+			margin-left: 0px;
+		}
+	}
+	.tickets,.tickets1{
+		cursor: pointer;
+	}
+</style>
+
+<body>
+
+	<!-- Main Wrapper -->
+	<div class="main-wrapper">
+
+		<%- include('partial/header'); %>
+			<div class="page-wrapper">
+				<div class="content container-fluid">
+
+					<!-- Page Header -->
+
+
+					<div class="row">
+						<div class="col-md-12">
+							<div class="card">
+								<div class="card-body">
+									<div class='selecttag'> <select class="select" onchange="subject()" id="subject">
+											<option value="none">Select Category</option>
+											<option value="Uploading Issue">Uploading Issue</option>
+											<option value="Payment Issue">Payment Issue</option>
+											<option value="Login Issue">Login Issue</option>
+											<option value="Acknowledgement Issue">Acknowledgement Issue</option>
+										</select></div>
+									<div>
+
+										<div class="row" id="tickets">
+
+										</div>
+										<div id="nodata" class="text-center">No Tickets</div>
+										<div id="pagination-container"></div>
+										<div id="pagination-container1"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					
+
+				</div>
+			</div>
+			<!-- /Page Wrapper -->
+
+	</div>
+	<!-- /Main Wrapper -->
+
+	<!-- jQuery -->
+	<script src="/public/js/main/jquery-3.5.1.min.js"></script>
+
+	<!-- Bootstrap Core JS -->
+	<script src="/public/js/main/popper.min.js"></script>
+	<script src="/public/js/main/bootstrap.min.js"></script>
+
+	<!-- Feather Icon JS -->
+	<script src="/public/js/main/feather.min.js"></script>
+
+	<!-- Slimscroll JS -->
+	<script src="/public/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+	<!-- Select2 JS -->
+	<script src="/public/plugins/select2/js/select2.min.js"></script>
+
+	<!-- Datepicker Core JS -->
+	<script src="/public/plugins/moment/moment.min.js"></script>
+	<script src="/public/js/main/bootstrap-datetimepicker.min.js"></script>
+
+	<!-- Datatables JS -->
+	<script src="/public/plugins/datatables/jquery.dataTables.min.js"></script>
+	<script src="/public/plugins/datatables/datatables.min.js"></script>
+
+	<!-- Custom JS -->
+	<script src="/public/js/main/script.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/8.2.5/firebase.js"></script>
+	<script src="/public/js/jquery.simplePagination.js"></script>
+</body>
+<script src="/public/js/custom/firebase.js"></script>
+<script>
+
+
+	(async function () {
+		var db = firebase.firestore();
+		var userid = localStorage.getItem("userid")
+		var uemail = localStorage.getItem("uemail")
+		var Acknowledgement = new Promise((resolve, reject) => {
+			db.collection("tickets").doc("client").collection("Acknowledgement Issue").orderBy("date", "desc").get().then((snap) => {
+				var data = []
+				snap.forEach((doc) => {
+					if(doc.data().email==uemail){
+					data.push(doc.data())
+					document.getElementById("tickets").innerHTML +=
+						`
+			<div class="card col-md-12 tickets" id="Acknowledgement_Issue_${doc.id}" onclick="viewticket(this)">
+			<div class="card-body">
+				<p>${doc.data().subject} <span style='float: right'>${doc.data().date}</span></p>				
+				<p>Name : ${doc.data().name}</p>
+				<p>Phone : ${doc.data().phone}</p>
+				<p>Email : ${doc.data().email}</p>
+				<p>Message : ${doc.data().message} <span style='float: right;cursor: pointer;' class='${doc.data().subject}' id='${doc.id}' onclick='del(this)'><i class="fa fa-trash" aria-hidden="true"></i></span></p>
+				</div>
+			</div>
+			`
+		}
+				})
+			
+				resolve(data.length)
+
+			})
+		})
+		var Payment = new Promise((resolve, reject) => {
+			db.collection("tickets").doc("client").collection("Payment Issue").orderBy("date", "desc").get().then((snap) => {
+				var data = []
+				snap.forEach((doc) => {
+					if(doc.data().email==uemail){
+					data.push(doc.data())
+					document.getElementById("tickets").innerHTML +=
+						`
+			<div class="card col-md-12 tickets" id="Payment_Issue_${doc.id}" onclick="viewticket(this)">
+			<div class="card-body">
+				<p>${doc.data().subject} <span style='float: right'>${doc.data().date}</span></p>
+				<p>Name : ${doc.data().name}</p>
+				<p>Phone : ${doc.data().phone}</p>
+				<p>Email : ${doc.data().email}</p>
+				<p>Message : ${doc.data().message} <span style='float: right;cursor: pointer;' class='${doc.data().subject}' id='${doc.id}' onclick='del(this)'><i class="fa fa-trash" aria-hidden="true"></i></span></p>
+				</div>
+			</div>
+			`
+		}
+				})
+				resolve(data.length)
+			})
+		})
+		var Category = new Promise((resolve, reject) => {
+			db.collection("tickets").doc("client").collection("Login Issue").orderBy("date", "desc").get().then((snap) => {
+				var data = []
+				snap.forEach((doc) => {
+					if(doc.data().email==uemail){
+					data.push(doc.data())
+					document.getElementById("tickets").innerHTML +=
+						`
+			<div class="card col-md-12 tickets" id="Login_Issue_${doc.id}" onclick="viewticket(this)">
+			<div class="card-body">
+				<p>${doc.data().subject} <span style='float: right'>${doc.data().date}</span></p>
+				<p>Name : ${doc.data().name}</p>
+				<p>Phone : ${doc.data().phone}</p>
+				<p>Email : ${doc.data().email}</p>
+				<p>Message : ${doc.data().message} <span style='float: right;cursor: pointer;' class='${doc.data().subject}' id='${doc.id}' onclick='del(this)'><i class="fa fa-trash" aria-hidden="true"></i></span></p>
+				</div>
+			</div>
+			`
+		}
+				})
+				resolve(data.length)
+			})
+		})
+		var Uploading = new Promise((resolve, reject) => {
+			db.collection("tickets").doc("client").collection("Uploading Issue").orderBy("date", "desc").get().then((snap) => {
+				var data = []
+				snap.forEach((doc) => {
+					if(doc.data().email==uemail){
+					data.push(doc.data())
+					document.getElementById("tickets").innerHTML +=
+						`
+			<div class="card col-md-12 tickets" id="Uploading_Issue_${doc.id}" onclick="viewticket(this)">
+			<div class="card-body">
+				<p>${doc.data().subject} <span style='float: right'>${doc.data().date}</span></p>
+				<p>Name : ${doc.data().name}</p>
+				<p>Phone : ${doc.data().phone}</p>
+				<p>Email : ${doc.data().email}</p>
+				<p>Message : ${doc.data().message} <span style='float: right;cursor: pointer;' class='${doc.data().subject}' id='${doc.id}' onclick='del(this)'><i class="fa fa-trash" aria-hidden="true"></i></span></p>
+				</div>
+			</div>
+			`
+		}
+				})
+				resolve(data.length)
+			})
+		})
+
+		var Acknowledgementlegth = await Acknowledgement
+		var Paymentlength = await Payment
+		var Categorylength = await Category
+		var Uploadinglength = await Uploading
+		var totallength = Number(Acknowledgementlegth) + Number(Paymentlength) + Number(Categorylength) + Number(Uploadinglength)
+
+		del = (e) => {
+			db.collection("tickets").doc("client").collection(e.className).doc(e.id).delete().then((snap) => { window.location.reload() })
+		}
+
+		if (totallength == 0) {
+			document.getElementById("nodata").style.display = "block"
+		} else {
+			document.getElementById("nodata").style.display = "none"
+		}
+
+		if (totallength > 10) {
+			var items = $("#tickets .tickets");
+			var numItems = totallength;
+			var perPage = 10;
+			items.slice(perPage).hide();
+
+			$('#pagination-container').pagination({
+				items: numItems,
+				itemsOnPage: perPage,
+				prevText: "&laquo;",
+				nextText: "&raquo;",
+				onPageClick: function (pageNumber) {
+					var showFrom = perPage * (pageNumber - 1);
+					var showTo = showFrom + perPage;
+					items.hide().slice(showFrom, showTo).show();
+				}
+			});
+		}
+	})();
+
+	function subject() {
+		var uemail = localStorage.getItem("uemail")
+		document.getElementById("pagination-container").style.display = "none"
+		var subject = document.getElementById("subject").value
+		console.log(subject)
+		if (subject == "Acknowledgement Issue") {
+			document.getElementById("tickets").innerHTML = ""
+			db.collection("tickets").doc("client").collection("Acknowledgement Issue").orderBy("date", "desc").get().then((snap) => {
+				var data = []
+				snap.forEach((doc) => {
+					if(doc.data().email==uemail){
+					data.push(doc.data())
+					document.getElementById("tickets").innerHTML +=
+						`
+			<div class="card col-md-12 tickets1" id="Acknowledgement_Issue_${doc.id}" onclick="viewticket(this)">
+			<div class="card-body">
+				<p>${doc.data().subject} <span style='float: right'>${doc.data().date}</span></p>				
+				<p>Name : ${doc.data().name}</p>
+				<p>Phone : ${doc.data().phone}</p>
+				<p>Email : ${doc.data().email}</p>
+				<p>Message : ${doc.data().message} <span style='float: right;cursor: pointer;' class='${doc.data().subject}' id='${doc.id}' onclick='del(this)'><i class="fa fa-trash" aria-hidden="true"></i></span></p>
+				</div>
+			</div>
+			`
+		}
+				})
+				pagination(data.length)
+			})
+		} else if (subject == "Uploading Issue") {
+			document.getElementById("tickets").innerHTML = ""
+			db.collection("tickets").doc("client").collection("Uploading Issue").orderBy("date", "desc").get().then((snap) => {
+				var data = []
+				snap.forEach((doc) => {
+					if(doc.data().email==uemail){
+					data.push(doc.data())
+					document.getElementById("tickets").innerHTML +=
+						`
+			<div class="card col-md-12 tickets1" id="Uploading_Issue_${doc.id}" onclick="viewticket(this)">
+			<div class="card-body">
+				<p>${doc.data().subject} <span style='float: right'>${doc.data().date}</span></p>
+				<p>Name : ${doc.data().name}</p>
+				<p>Phone : ${doc.data().phone}</p>
+				<p>Email : ${doc.data().email}</p>
+				<p>Message : ${doc.data().message} <span style='float: right;cursor: pointer;' class='${doc.data().subject}' id='${doc.id}' onclick='del(this)'><i class="fa fa-trash" aria-hidden="true"></i></span></p>
+				</div>
+			</div>
+			`
+		}
+				})
+				pagination(data.length)
+			})
+		} else if (subject == "Payment Issue") {
+			document.getElementById("tickets").innerHTML = ""
+			db.collection("tickets").doc("client").collection("Payment Issue").orderBy("date", "desc").get().then((snap) => {
+				var data = []
+				snap.forEach((doc) => {
+					if(doc.data().email==uemail){
+					data.push(doc.data())
+					document.getElementById("tickets").innerHTML +=
+						`
+			<div class="card col-md-12 tickets1" id="Payment_Issue_${doc.id}" onclick="viewticket(this)">
+			<div class="card-body">
+				<p>${doc.data().subject} <span style='float: right'>${doc.data().date}</span></p>
+				<p>Name : ${doc.data().name}</p>
+				<p>Phone : ${doc.data().phone}</p>
+				<p>Email : ${doc.data().email}</p>
+				<p>Message : ${doc.data().message} <span style='float: right;cursor: pointer;' class='${doc.data().subject}' id='${doc.id}' onclick='del(this)'><i class="fa fa-trash" aria-hidden="true"></i></span></p>
+				</div>
+			</div>
+			`
+		}
+				})
+				pagination(data.length)
+			})
+		} else if (subject == "Login Issue") {
+			document.getElementById("tickets").innerHTML = ""
+			db.collection("tickets").doc("client").collection("Login Issue").orderBy("date", "desc").get().then((snap) => {
+				var data = []
+				snap.forEach((doc) => {
+					if(doc.data().email==uemail){
+					data.push(doc.data())
+					document.getElementById("tickets").innerHTML +=
+						`
+			<div class="card col-md-12 tickets1" id="Login_Issue_${doc.id}" onclick="viewticket(this)">
+			<div class="card-body">
+				<p>${doc.data().subject} <span style='float: right'>${doc.data().date}</span></p>
+				<p>Name : ${doc.data().name}</p>
+				<p>Phone : ${doc.data().phone}</p>
+				<p>Email : ${doc.data().email}</p>
+				<p>Message : ${doc.data().message} <span style='float: right;cursor: pointer;' class='${doc.data().subject}' id='${doc.id}' onclick='del(this)'><i class="fa fa-trash" aria-hidden="true"></i></span></p>
+				</div>
+			</div>
+			`
+		}
+				})
+				pagination(data.length)
+			})
+		} else {
+			window.location.reload()
+		}
+
+		function pagination(length) {
+			if (length == 0) {
+			document.getElementById("nodata").style.display = "block"
+		} else {
+			document.getElementById("nodata").style.display = "none"
+		}
+			if (length > 8) {
+				var items = $("#tickets .tickets1");
+				var numItems = length;
+				var perPage = 8;
+				items.slice(perPage).hide();
+
+				$('#pagination-container1').pagination({
+					items: numItems,
+					itemsOnPage: perPage,
+					prevText: "&laquo;",
+					nextText: "&raquo;",
+					onPageClick: function (pageNumber) {
+						var showFrom = perPage * (pageNumber - 1);
+						var showTo = showFrom + perPage;
+						items.hide().slice(showFrom, showTo).show();
+					}
+				});
+			}
+		}
+	}
+
+	function viewticket(e){
+		console.log(e.id)
+		window.location.replace("/tickets/" +e.id)
+	}
+</script>
+<!-- Mirrored from kanakku.dreamguystech.com/template-html/add-expenses.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 02 Feb 2021 23:22:44 GMT -->
+
+</html>
